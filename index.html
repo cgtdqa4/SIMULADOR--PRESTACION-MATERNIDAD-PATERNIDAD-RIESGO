@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CFT - Simulador de Cobertura y Salario (Maternidad / Paternidad / Riesgo)</title>
+  <title>CGT - Simulador de Cobertura y Salario (Maternidad / Paternidad / Riesgo)</title>
   <style>
     :root {
-      --cft-primary: #0F2C59;     /* Azul Marino CFT */
-      --cft-secondary: #0075A2;   /* Azul Corporativo CFT */
-      --cft-accent: #00A8E8;      /* Azul Claro Accent */
-      --cft-bg: #F4F7FA;          /* Fondo Claro */
-      --cft-card-bg: #FFFFFF;     /* Fondo Tarjetas */
-      --cft-text: #1E293B;        /* Texto Principal */
-      --cft-muted: #64748B;       /* Texto Secundario */
-      --cft-border: #E2E8F0;      /* Borde */
+      --cgt-primary: #C5221F;     /* Rojo CGT */
+      --cgt-dark: #1A1A1A;        /* Negro / Gris muy oscuro */
+      --cgt-accent: #E53935;      /* Rojo Vivo */
+      --cgt-bg: #F8F9FA;          /* Fondo Claro */
+      --cgt-card-bg: #FFFFFF;     /* Fondo Tarjetas */
+      --cgt-text: #212529;        /* Texto Principal */
+      --cgt-muted: #6C757D;       /* Texto Secundario */
+      --cgt-border: #DEE2E6;      /* Borde */
     }
 
     * {
@@ -24,170 +24,188 @@
     }
 
     body {
-      background-color: var(--cft-bg);
-      color: var(--cft-text);
+      background-color: var(--cgt-bg);
+      color: var(--cgt-text);
       line-height: 1.5;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 20px 12px;
       min-height: 100vh;
     }
 
     .container {
       width: 100%;
       max-width: 900px;
-      background: var(--cft-card-bg);
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(15, 44, 89, 0.1);
+      margin: 0 auto;
+      background: var(--cgt-card-bg);
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       overflow: hidden;
-      border: 1px solid var(--cft-border);
+      border: 1px solid var(--cgt-border);
     }
 
     header {
-      background: linear-gradient(135deg, var(--cft-primary), var(--cft-secondary));
+      background: linear-gradient(135deg, var(--cgt-dark), #333333);
+      border-bottom: 4px solid var(--cgt-primary);
       color: white;
-      padding: 24px 30px;
+      padding: 20px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 12px;
     }
 
     .logo-badge {
-      background: var(--cft-accent);
-      color: var(--cft-primary);
+      background: var(--cgt-primary);
+      color: white;
       font-weight: 900;
-      font-size: 1.4rem;
-      padding: 6px 14px;
+      font-size: 1.5rem;
+      padding: 6px 16px;
       border-radius: 6px;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
+      box-shadow: 0 2px 6px rgba(197, 34, 31, 0.4);
     }
 
     .header-text h1 {
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 700;
       margin-bottom: 4px;
     }
 
     .header-text p {
       font-size: 0.85rem;
-      opacity: 0.9;
+      color: #D1D5DB;
     }
 
     .content-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 24px;
     }
 
-    @media (max-width: 768px) {
-      .content-grid {
-        grid-template-columns: 1fr;
-        padding: 20px;
-      }
+    .form-panel {
+      background: #FFFFFF;
     }
 
     .form-group {
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     label {
       display: block;
       font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--cft-primary);
+      font-weight: 700;
+      color: var(--cgt-dark);
       margin-bottom: 6px;
     }
 
     input, select {
       width: 100%;
-      padding: 10px 14px;
-      border: 1px solid var(--cft-border);
+      padding: 10px 12px;
+      border: 1px solid var(--cgt-border);
       border-radius: 6px;
       font-size: 0.95rem;
-      color: var(--cft-text);
+      color: var(--cgt-text);
+      background-color: #FAFAFA;
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     input:focus, select:focus {
-      border-color: var(--cft-secondary);
-      box-shadow: 0 0 0 3px rgba(0, 117, 162, 0.15);
+      border-color: var(--cgt-primary);
+      background-color: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(197, 34, 31, 0.15);
     }
 
     .results-panel {
-      background-color: var(--cft-bg);
+      background-color: #F8F9FA;
       border-radius: 8px;
       padding: 20px;
-      border: 1px solid var(--cft-border);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      border: 1px solid var(--cgt-border);
     }
 
     .results-header {
       font-size: 1rem;
       font-weight: 700;
-      color: var(--cft-primary);
-      margin-bottom: 15px;
-      border-bottom: 2px solid var(--cft-secondary);
-      padding-bottom: 8px;
+      color: var(--cgt-dark);
+      margin-bottom: 14px;
+      border-bottom: 2px solid var(--cgt-primary);
+      padding-bottom: 6px;
+    }
+
+    .stats-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
     }
 
     .stat-card {
       background: white;
-      padding: 14px;
+      padding: 12px 16px;
       border-radius: 6px;
-      border-left: 4px solid var(--cft-secondary);
-      margin-bottom: 12px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      border-left: 4px solid var(--cgt-dark);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
 
     .stat-card.highlight {
-      border-left-color: var(--cft-accent);
-      background: #EBF8FF;
+      border-left-color: var(--cgt-primary);
+      background: #FFF5F5;
     }
 
     .stat-label {
-      font-size: 0.8rem;
-      color: var(--cft-muted);
+      font-size: 0.78rem;
+      color: var(--cgt-muted);
       text-transform: uppercase;
+      font-weight: 600;
       letter-spacing: 0.5px;
     }
 
     .stat-value {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 700;
-      color: var(--cft-primary);
+      color: var(--cgt-dark);
       margin-top: 2px;
     }
 
+    .stat-card.highlight .stat-value {
+      color: var(--cgt-primary);
+    }
+
     .info-box {
-      background-color: #ECFDF5;
-      border: 1px solid #A7F3D0;
-      color: #065F46;
-      padding: 12px;
+      background-color: #FFF3CD;
+      border: 1px solid #FFEEBA;
+      color: #856404;
+      padding: 12px 14px;
       border-radius: 6px;
       font-size: 0.82rem;
-      line-height: 1.4;
-      margin-top: 10px;
+      line-height: 1.45;
     }
 
     .info-box strong {
       display: block;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
+      color: #533F03;
     }
 
     footer {
-      background-color: #F8FAFC;
-      border-top: 1px solid var(--cft-border);
-      padding: 15px 30px;
+      background-color: var(--cgt-dark);
+      color: #D1D5DB;
+      padding: 14px 20px;
       text-align: center;
       font-size: 0.8rem;
-      color: var(--cft-muted);
+      border-top: 1px solid #333;
+    }
+
+    footer strong {
+      color: #FFFFFF;
+    }
+
+    @media (min-width: 640px) {
+      .stats-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
   </style>
 </head>
@@ -196,10 +214,10 @@
   <div class="container">
     <header>
       <div class="header-text">
-        <h1>Simulador de Prestaciones por Maternidad / Paternidad / Riesgo</h1>
-        <p>Verificación de Base Reguladora (100%) y Cobertura de Seguridad Social / Mutua</p>
+        <h1>Simulador de Cobertura y Salario (Maternidad / Paternidad / Riesgo)</h1>
+        <p>Comprobación de Base Reguladora (100%) y exención de retenciones</p>
       </div>
-      <div class="logo-badge">CFT</div>
+      <div class="logo-badge">CGT</div>
     </header>
 
     <div class="content-grid">
@@ -214,15 +232,15 @@
         </div>
 
         <div class="form-group">
-          <label for="baseCotizacion">Base Cotización Contingencias Comunes (Mes anterior)</label>
+          <label for="baseCotizacion">Base Cotización Contingencias Comunes (Mes anterior en €)</label>
           <input type="number" id="baseCotizacion" value="1800" min="0" step="10" oninput="calcular()">
         </div>
 
         <div class="form-group">
           <label for="tipoCobro">Grupo de Cotización / Tipo de Salario</label>
           <select id="tipoCobro" onchange="calcular()">
-            <option value="30">Mensual (Divisor fijo 30 días)</option>
-            <option value="diario">Diario (Según días exactos del mes)</option>
+            <option value="30">Mensual (Divisor fijo de 30 días)</option>
+            <option value="diario">Diario (Según días del mes - Ej. 30/31)</option>
           </select>
         </div>
 
@@ -234,34 +252,34 @@
 
       <!-- PANEL DE RESULTADOS -->
       <div class="results-panel">
-        <div>
-          <div class="results-header">Resumen de la Prestación (100%)</div>
+        <div class="results-header">Resumen de la Prestación (100% Base Reguladora)</div>
 
+        <div class="stats-container">
           <div class="stat-card">
-            <div class="stat-label">Base Reguladora Diaria (100%)</div>
+            <div class="stat-label">Base Reguladora Diaria</div>
             <div class="stat-value" id="baseDiaria">0.00 € / día</div>
           </div>
 
           <div class="stat-card highlight">
-            <div class="stat-label">Prestación Total Bruta Estimada</div>
+            <div class="stat-label">Prestación Total Bruta</div>
             <div class="stat-value" id="totalBruto">0.00 €</div>
           </div>
 
           <div class="stat-card">
-            <div class="stat-label">Equivalente Mensual Bruto (30 días)</div>
+            <div class="stat-label">Equivalente Mensual</div>
             <div class="stat-value" id="mensualBruto">0.00 € / mes</div>
           </div>
         </div>
 
         <div class="info-box">
-          <strong>✓ Garantía de Exención de Retención:</strong>
-          Las prestaciones públicas por nacimiento/cuidado de menor y riesgo durante el embarazo abonadas por la Seguridad Social o Mutua están **exentas de IRPF**. Comprueba que no exista retención indebida en tu nómina o recibo de prestación durante este periodo.
+          <strong>✓ Garantía de Exención de IRPF:</strong>
+          Las prestaciones públicas por nacimiento, cuidado de menor o baja por riesgo durante el embarazo están <strong>exentas de IRPF</strong>. La Seguridad Social o la Mutua deben abonar el 100% de la Base Reguladora sin aplicar retenciones por IRPF en la prestación.
         </div>
       </div>
     </div>
 
     <footer>
-      <strong>CFT - Centro de Formación y Trabajo</strong> | Herramienta informativa para la comprobación de bases reguladoras y derechos laborales.
+      <strong>CGT - Confederación General del Trabajo</strong> | Herramienta de autodefensa laboral y cálculo de prestaciones.
     </footer>
   </div>
 
@@ -282,326 +300,6 @@
       const diasPermiso = parseInt(document.getElementById('diasPermiso').value) || 0;
 
       let divisor = 30;
-
-      // Cálculo de la Base Reguladora Diaria (100%)
-      const baseDiaria = baseCotizacion / divisor;
-      const totalBruto = baseDiaria * diasPermiso;
-      const mensualBruto = baseDiaria * 30;
-
-      // Formatear resultados en Euros
-      document.getElementById('baseDiaria').textContent = baseDiaria.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' € / día';
-      document.getElementById('totalBruto').textContent = totalBruto.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
-      document.getElementById('mensualBruto').textContent = mensualBruto.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' € / mes';
-    }
-
-    // Inicializar cálculo al cargar la página
-    window.onload = calcular;
-  </script>
-
-</body>
-</html>
-
-Instrucciones rápidas para desplegar en GitHub Pages:
-
-    Crea un repositorio en GitHub (ej. simulador-cobertura-cft).
-
-    Sube este código en un archivo llamado index.html en la rama principal (main o master).
-
-    Ve a Settings > Pages en tu repositorio.
-
-    En Source, selecciona Deploy from a branch,
-
-
-Gemini es una IA y puede cometer errores, incluso sobre personas. Tu privacidad y GeminiSe abre en una ventana nueva
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CFT - Simulador de Cobertura y Salario (Maternidad / Paternidad / Riesgo)</title>
-  <style>
-    :root {
-      --cft-primary: #0F2C59;     /* Azul Marino CFT */
-      --cft-secondary: #0075A2;   /* Azul Corporativo CFT */
-      --cft-accent: #00A8E8;      /* Azul Claro Accent */
-      --cft-bg: #F4F7FA;          /* Fondo Claro */
-      --cft-card-bg: #FFFFFF;     /* Fondo Tarjetas */
-      --cft-text: #1E293B;        /* Texto Principal */
-      --cft-muted: #64748B;       /* Texto Secundario */
-      --cft-success: #10B981;     /* Verde Informativo */
-      --cft-border: #E2E8F0;      /* Borde */
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    }
-
-    body {
-      background-color: var(--cft-bg);
-      color: var(--cft-text);
-      line-height: 1.5;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 900px;
-      background: var(--cft-card-bg);
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(15, 44, 89, 0.1);
-      overflow: hidden;
-      border: 1px solid var(--cft-border);
-    }
-
-    header {
-      background: linear-gradient(135deg, var(--cft-primary), var(--cft-secondary));
-      color: white;
-      padding: 24px 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .logo-badge {
-      background: var(--cft-accent);
-      color: var(--cft-primary);
-      font-weight: 900;
-      font-size: 1.4rem;
-      padding: 6px 14px;
-      border-radius: 6px;
-      letter-spacing: 1.5px;
-    }
-
-    .header-text h1 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .header-text p {
-      font-size: 0.85rem;
-      opacity: 0.9;
-    }
-
-    .content-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      padding: 30px;
-    }
-
-    @media (max-width: 768px) {
-      .content-grid {
-        grid-template-columns: 1fr;
-        padding: 20px;
-      }
-    }
-
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--cft-primary);
-      margin-bottom: 6px;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 10px 14px;
-      border: 1px solid var(--cft-border);
-      border-radius: 6px;
-      font-size: 0.95rem;
-      color: var(--cft-text);
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    input:focus, select:focus {
-      border-color: var(--cft-secondary);
-      box-shadow: 0 0 0 3px rgba(0, 117, 162, 0.15);
-    }
-
-    .results-panel {
-      background-color: var(--cft-bg);
-      border-radius: 8px;
-      padding: 20px;
-      border: 1px solid var(--cft-border);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .results-header {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--cft-primary);
-      margin-bottom: 15px;
-      border-bottom: 2px solid var(--cft-secondary);
-      padding-bottom: 8px;
-    }
-
-    .stat-card {
-      background: white;
-      padding: 14px;
-      border-radius: 6px;
-      border-left: 4px solid var(--cft-secondary);
-      margin-bottom: 12px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    }
-
-    .stat-card.highlight {
-      border-left-color: var(--cft-accent);
-      background: #EBF8FF;
-    }
-
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--cft-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .stat-value {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--cft-primary);
-      margin-top: 2px;
-    }
-
-    .info-box {
-      background-color: #ECFDF5;
-      border: 1px solid #A7F3D0;
-      color: #065F46;
-      padding: 12px;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      line-height: 1.4;
-      margin-top: 10px;
-    }
-
-    .info-box strong {
-      display: block;
-      margin-bottom: 2px;
-    }
-
-    footer {
-      background-color: #F8FAFC;
-      border-top: 1px solid var(--cft-border);
-      padding: 15px 30px;
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--cft-muted);
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-    <header>
-      <div class="header-text">
-        <h1>Simulador de Prestaciones por Maternidad / Paternidad / Riesgo</h1>
-        <p>Verificación de Base Reguladora (100%) y Cobertura de Seguridad Social / Mutua</p>
-      </div>
-      <div class="logo-badge">CFT</div>
-    </header>
-
-    <div class="content-grid">
-      <!-- PANEL DE ENTRADA DE DATOS -->
-      <div class="form-panel">
-        <div class="form-group">
-          <label for="tipoPrestacion">Tipo de Prestación / Permiso</label>
-          <select id="tipoPrestacion" onchange="actualizarDuracionDefault(); calcular();">
-            <option value="nacimiento">Nacimiento y Cuidado de Menor (16 semanas)</option>
-            <option value="riesgo">Riesgo durante el Embarazo / Lactancia Natural</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="baseCotizacion">Base Cotización Contingencias Comunes (Mes anterior)</label>
-          <input type="number" id="baseCotizacion" value="1800" min="0" step="10" oninput="calcular()">
-        </div>
-
-        <div class="form-group">
-          <label for="tipoCobro">Grupo de Cotización / Tipo de Salario</label>
-          <select id="tipoCobro" onchange="calcular()">
-            <option value="30">Mensual (Divisor fijo 30 días)</option>
-            <option value="diario">Diario (Según días exactos del mes - Ej. 30/31)</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="diasPermiso">Duración del Periodo (Días)</label>
-          <input type="number" id="diasPermiso" value="112" min="1" oninput="calcular()">
-        </div>
-      </div>
-
-      <!-- PANEL DE RESULTADOS -->
-      <div class="results-panel">
-        <div>
-          <div class="results-header">Resumen de la Prestación (100%)</div>
-
-          <div class="stat-card">
-            <div class="stat-label">Base Reguladora Diaria (100%)</div>
-            <div class="stat-value" id="baseDiaria">0.00 € / día</div>
-          </div>
-
-          <div class="stat-card highlight">
-            <div class="stat-label">Prestación Total Bruta Estimada</div>
-            <div class="stat-value" id="totalBruto">0.00 €</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-label">Equivalente Mensual Bruto (30 días)</div>
-            <div class="stat-value" id="mensualBruto">0.00 € / mes</div>
-          </div>
-        </div>
-
-        <div class="info-box">
-          <strong>✓ Garantía de Exención de Retención:</strong>
-          Las prestaciones públicas por nacimiento/cuidado de menor y riesgo durante el embarazo abonadas por la Seguridad Social o Mutua están **exentas de IRPF**. Comprueba que no exista retención indebida en tu nómina o recibo de prestación durante este periodo.
-        </div>
-      </div>
-    </div>
-
-    <footer>
-      <strong>CFT - Centro de Formación y Trabajo</strong> | Herramienta informativa para la comprobación de bases reguladoras y derechos laborales.
-    </footer>
-  </div>
-
-  <script>
-    function actualizarDuracionDefault() {
-      const tipo = document.getElementById('tipoPrestacion').value;
-      const diasInput = document.getElementById('diasPermiso');
-      if (tipo === 'nacimiento') {
-        diasInput.value = 112; // 16 semanas * 7 días
-      } else {
-        diasInput.value = 30;  // Estimación base mensual para riesgo
-      }
-    }
-
-    function calcular() {
-      const baseCotizacion = parseFloat(document.getElementById('baseCotizacion').value) || 0;
-      const tipoCobro = document.getElementById('tipoCobro').value;
-      const diasPermiso = parseInt(document.getElementById('diasPermiso').value) || 0;
-
-      let divisor = 30;
-      if (tipoCobro === 'diario') {
-        divisor = 30; // divisor estándar base diaria estándar
-      }
 
       // Cálculo de la Base Reguladora Diaria (100%)
       const baseDiaria = baseCotizacion / divisor;
